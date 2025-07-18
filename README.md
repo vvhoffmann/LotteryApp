@@ -23,7 +23,7 @@ A small backend service that stores lottery tickets submitted by users and sched
 | Budowanie    | Maven 3.9                                 |
 | Kontenery    | Docker, Docker Compose                    |
 | Testy        | JUnit 5, Mockito, TestContainers, AssertJ |
-| Inne         | Lombok, WireMock (stubowanie REST)        |
+| Inne         | Lombok        |
 
 ---
 
