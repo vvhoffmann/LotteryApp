@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-class InMemoryNumberReceiverRepositoryTestImpl implements NumberReceiverRepository {
+class TicketRepositoryTestImpl implements TicketRepository {
 
     Map<String, Ticket> db = new ConcurrentHashMap<>();
 
@@ -22,4 +22,8 @@ class InMemoryNumberReceiverRepositoryTestImpl implements NumberReceiverReposito
                 .toList();
     }
 
+    @Override
+    public Ticket findByHash(final String hash) {
+        return db.get(hash);
+    }
 }
