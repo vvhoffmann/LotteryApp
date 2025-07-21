@@ -23,6 +23,7 @@ class ResultCheckerMapper {
                 .map(player -> ResultDto.builder()
                         .id(player.id())
                         .numbers(player.numbers())
+                        .hitNumbers(player.hitNumbers())
                         .drawDate(player.drawDate())
                         .isWinner(player.isWinner())
                         .build())

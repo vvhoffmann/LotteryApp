@@ -23,6 +23,7 @@ class WinnersGenerator {
                 .isWinner(isWinner(hitNumbers))
                 .id(ticket.id())
                 .numbers(ticket.numbers())
+                .hitNumbers(hitNumbers)
                 .drawDate(ticket.drawDate())
                 .build();
     }

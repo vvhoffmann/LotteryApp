@@ -9,5 +9,6 @@ import java.util.Set;
 record Player(String id,
               LocalDateTime drawDate,
               Set<Integer> numbers,
+              Set<Integer> hitNumbers,
               boolean isWinner) {
 }

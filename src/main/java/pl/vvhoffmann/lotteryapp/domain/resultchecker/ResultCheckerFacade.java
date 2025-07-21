@@ -5,7 +5,7 @@ import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.NumbersGeneratorFacade;
 import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.dto.WinningNumbersDto;
 import pl.vvhoffmann.lotteryapp.domain.numbersreceiver.NumbersReceiverFacade;
 import pl.vvhoffmann.lotteryapp.domain.numbersreceiver.dto.TicketDto;
-import pl.vvhoffmann.lotteryapp.domain.resultchecker.dto.PlayerDto;
+import pl.vvhoffmann.lotteryapp.domain.resultchecker.dto.PlayersDto;
 import pl.vvhoffmann.lotteryapp.domain.resultchecker.dto.ResultDto;
 
 import java.util.List;
@@ -16,23 +16,23 @@ public class ResultCheckerFacade {
 
     NumbersGeneratorFacade numbersGeneratorFacade;
     NumbersReceiverFacade numbersReceiverFacade;
-    PlayerRepository playerRepository;
+    PlayersRepository playersRepository;
     WinnersGenerator winnersGenerator;
 
-    public PlayerDto generateWinner() {
+    public PlayersDto generateWinners() {
         List<TicketDto> allTicketsByDate = numbersReceiverFacade.retrieveAllTicketsByNextDrawDate();
         List<Ticket> tickets = ResultCheckerMapper.mapFromTicketDtoToTicket(allTicketsByDate);
         WinningNumbersDto winningNumbersDto = numbersGeneratorFacade.generateWinningNumbers();
         final Set<Integer> winningNumbers = winningNumbersDto.winningNumbers();
         if (winningNumbers.isEmpty()) {
-            return PlayerDto.builder()
+            return PlayersDto.builder()
                     .message("Winning numbers failed to retrieve")
                     .build();
         }
 
         final List<Player> players = winnersGenerator.retrieveWinners(tickets, winningNumbers);
-        playerRepository.saveAll(players);
-        return PlayerDto.builder()
+        playersRepository.saveAll(players);
+        return PlayersDto.builder()
                 .results(ResultCheckerMapper.mapPlayersToResults(players))
                 .message("Winners succeed to retrieve")
                 .build();
@@ -40,7 +40,8 @@ public class ResultCheckerFacade {
     }
 
     public ResultDto findById(String id) {
-        Player player = playerRepository.findById(id).orElseThrow(() -> new PlayerNotFoundException("Player not found"));
+        Player player = playersRepository.findById(id)
+                .orElseThrow(() -> new PlayerNotFoundException("Player not found"));
         return ResultDto.builder()
                 .id(player.id())
                 .numbers(player.numbers())
