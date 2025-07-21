@@ -1,8 +1,10 @@
 package pl.vvhoffmann.lotteryapp.domain.numbersgenerator;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 class RandomNumbersGenerator implements RandomNumbersGenerable {
 
@@ -21,7 +23,7 @@ class RandomNumbersGenerator implements RandomNumbersGenerable {
             if(!isNewNumberRepetitive(winningNumbers, randomNumber))
                 winningNumbers.add(generateRandomNumber());
         }
-        return winningNumbers;
+        return winningNumbers.stream().sorted().collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     private boolean isQuantityOfNumbersLowerThanSix(final Set<Integer> winningNumbers) {
