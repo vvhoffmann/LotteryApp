@@ -17,12 +17,12 @@ public class ResultAnnouncerFacade {
     public static LocalTime RESULT_ANNOUNCMENT_TIME = LocalTime.of(12, 5);
 
     private final ResultCheckerFacade resultCheckerFacade;
-    private final ResponseRepository responseRepository;
+    private final ResultResponseRepository resultResponseRepository;
     private final Clock clock;
 
     public ResultAnnouncerResponseDto checkResult(String id) {
-        if (responseRepository.existsById(id)) {
-            final Optional<ResultResponse> optionalFromCache = responseRepository.findById(id);
+        if (resultResponseRepository.existsById(id)) {
+            final Optional<ResultResponse> optionalFromCache = resultResponseRepository.findById(id);
             if (optionalFromCache.isPresent()) {
                 final ResultResponse responseFromCache = optionalFromCache.get();
                 return ResultAnnouncerMapper.mapFromResultResponseToResultAnnouncerResponseDto(responseFromCache);
@@ -32,8 +32,8 @@ public class ResultAnnouncerFacade {
             if (resultDto == null)
                 return new ResultAnnouncerResponseDto(null, ResponseMessage.ID_DOES_NOT_EXIST_MESSAGE.message);
             ResultResponseDto resultResponseDto = buildResponseDto(resultDto);
-            responseRepository.save(buildResultResponse(resultResponseDto));
-            if (responseRepository.existsById(id) && !isAfterResultAnnouncementTime(resultDto))
+            resultResponseRepository.save(buildResultResponse(resultResponseDto));
+            if (resultResponseRepository.existsById(id) && !isAfterResultAnnouncementTime(resultDto))
                 return new ResultAnnouncerResponseDto(resultResponseDto, ResponseMessage.WAIT_MESSAGE.message);
             if (resultCheckerFacade.findById(id).isWinner())
                 return new ResultAnnouncerResponseDto(resultResponseDto, ResponseMessage.WIN_MESSAGE.message);

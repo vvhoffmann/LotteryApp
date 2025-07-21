@@ -2,7 +2,7 @@ package pl.vvhoffmann.lotteryapp.domain.resultannouncer;
 
 import java.util.Optional;
 
-interface ResponseRepository {
+interface ResultResponseRepository {
 
     ResultResponse save(ResultResponse resultResponse);
 
