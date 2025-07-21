@@ -7,5 +7,5 @@ import java.util.Set;
 
 @Builder
 public record WinningNumbersDto (Set<Integer> winningNumbers,
-                                 LocalDateTime date
+                                 LocalDateTime drawDate
 ){}

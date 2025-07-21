@@ -8,5 +8,5 @@ import java.util.Set;
 @Builder
 record WinningNumbers ( String id,
                         Set<Integer> numbers,
-                        LocalDateTime date){
+                        LocalDateTime drawDate){
 }
