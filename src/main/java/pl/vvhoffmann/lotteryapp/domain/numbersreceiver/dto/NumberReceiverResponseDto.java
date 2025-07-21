@@ -1,4 +1,4 @@
-package pl.vvhoffmann.lotteryapp.domain.numberreceiver.dto;
+package pl.vvhoffmann.lotteryapp.domain.numbersreceiver.dto;
 
 import lombok.Builder;
 

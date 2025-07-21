@@ -1,4 +1,4 @@
-package pl.vvhoffmann.lotteryapp.domain.numberreceiver;
+package pl.vvhoffmann.lotteryapp.domain.numbersreceiver;
 
 enum ValidationResult {
     NOT_SIX_NUMBERS_GIVEN("YOU SHOULD GIVE 6 NUMBERS"),

@@ -1,15 +1,15 @@
-package pl.vvhoffmann.lotteryapp.domain.numberreceiver;
+package pl.vvhoffmann.lotteryapp.domain.numbersreceiver;
 
 import lombok.AllArgsConstructor;
-import pl.vvhoffmann.lotteryapp.domain.numberreceiver.dto.NumberReceiverResponseDto;
-import pl.vvhoffmann.lotteryapp.domain.numberreceiver.dto.TicketDto;
+import pl.vvhoffmann.lotteryapp.domain.numbersreceiver.dto.NumberReceiverResponseDto;
+import pl.vvhoffmann.lotteryapp.domain.numbersreceiver.dto.TicketDto;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
-public class NumberReceiverFacade {
+public class NumbersReceiverFacade {
 
     private final TicketRepository ticketRepository;
     private final DrawDateGenerator drawDateGenerator;

@@ -1,4 +1,4 @@
-package pl.vvhoffmann.lotteryapp.domain.numberreceiver;
+package pl.vvhoffmann.lotteryapp.domain.numbersreceiver;
 
 class HashGeneratorTestImpl implements HashGenerable {
 

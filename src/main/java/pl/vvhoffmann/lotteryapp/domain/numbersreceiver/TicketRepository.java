@@ -1,4 +1,4 @@
-package pl.vvhoffmann.lotteryapp.domain.numberreceiver;
+package pl.vvhoffmann.lotteryapp.domain.numbersreceiver;
 
 import java.time.LocalDateTime;
 import java.util.List;
