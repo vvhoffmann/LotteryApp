@@ -15,15 +15,15 @@ A small backend service that stores lottery tickets submitted by users and sched
 
 ## Stos technologiczny
 
-| Kategoria    | Wykorzystana technologia                  |
-| ------------ | ----------------------------------------- |
-| Runtime      | Java 17                                   |
-| Framework    | Spring Boot 2.7                           |
-| Persystencja | Spring Data MongoDB                       |
-| Budowanie    | Maven 3.9                                 |
-| Kontenery    | Docker, Docker Compose                    |
-| Testy        | JUnit 5, Mockito, TestContainers, AssertJ |
-| Inne         | Lombok        |
+| Kategoria    | Wykorzystana technologia                            |
+| ------------ | -----------------------------------------           |
+| Runtime      | Java 17                                             |
+| Framework    | Spring Boot 3.5.0                                   |
+| Persystencja | Spring Data MongoDB                                 |
+| Budowanie    | Maven 3.9                                           |
+| Kontenery    | Docker, Docker Compose                              |
+| Testy        | JUnit 5, Mockito, TestContainers, AssertJ, WireMock |
+| Inne         | Lombok                                              |
 
 ---
 
