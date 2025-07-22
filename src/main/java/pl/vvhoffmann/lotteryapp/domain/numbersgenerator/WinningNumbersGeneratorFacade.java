@@ -1,6 +1,7 @@
 package pl.vvhoffmann.lotteryapp.domain.numbersgenerator;
 
 import lombok.AllArgsConstructor;
+import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.dto.SixRandomNumbersDto;
 import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.dto.WinningNumbersDto;
 import pl.vvhoffmann.lotteryapp.domain.numbersreceiver.NumbersReceiverFacade;
 
@@ -8,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @AllArgsConstructor
-public class NumbersGeneratorFacade {
+public class WinningNumbersGeneratorFacade {
 
     RandomNumbersGenerable randomNumbersGenerator;
     WinningNumbersRepository winningNumbersRepository;
@@ -17,8 +18,8 @@ public class NumbersGeneratorFacade {
 
     public WinningNumbersDto generateWinningNumbers() {
         LocalDateTime nextDrawDate = numbersReceiverFacade.retrieveNextDrawDate();
-        Set<Integer> winningNumbers = randomNumbersGenerator.generateSixRandomNumbers();
-        final Set<Integer> validatedNumbers = winningNumbersValidator.validate(winningNumbers);
+        SixRandomNumbersDto winningNumbersDto = randomNumbersGenerator.generateSixRandomNumbers();
+        final Set<Integer> validatedNumbers = winningNumbersValidator.validate(winningNumbersDto.numbers());
         winningNumbersRepository.save(WinningNumbers.builder()
                 .numbers(validatedNumbers)
                 .drawDate(nextDrawDate)

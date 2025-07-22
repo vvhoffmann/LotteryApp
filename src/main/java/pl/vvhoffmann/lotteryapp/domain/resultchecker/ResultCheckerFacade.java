@@ -1,7 +1,7 @@
 package pl.vvhoffmann.lotteryapp.domain.resultchecker;
 
 import lombok.AllArgsConstructor;
-import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.NumbersGeneratorFacade;
+import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.WinningNumbersGeneratorFacade;
 import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.dto.WinningNumbersDto;
 import pl.vvhoffmann.lotteryapp.domain.numbersreceiver.NumbersReceiverFacade;
 import pl.vvhoffmann.lotteryapp.domain.numbersreceiver.dto.TicketDto;
@@ -14,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class ResultCheckerFacade {
 
-    NumbersGeneratorFacade numbersGeneratorFacade;
+    WinningNumbersGeneratorFacade winningNumbersGeneratorFacade;
     NumbersReceiverFacade numbersReceiverFacade;
     PlayersRepository playersRepository;
     WinnersGenerator winnersGenerator;
@@ -22,7 +22,7 @@ public class ResultCheckerFacade {
     public PlayersDto generateWinners() {
         List<TicketDto> allTicketsByDate = numbersReceiverFacade.retrieveAllTicketsByNextDrawDate();
         List<Ticket> tickets = ResultCheckerMapper.mapFromTicketDtoToTicket(allTicketsByDate);
-        WinningNumbersDto winningNumbersDto = numbersGeneratorFacade.generateWinningNumbers();
+        WinningNumbersDto winningNumbersDto = winningNumbersGeneratorFacade.generateWinningNumbers();
         final Set<Integer> winningNumbers = winningNumbersDto.winningNumbers();
         if (winningNumbers.isEmpty()) {
             return PlayersDto.builder()
