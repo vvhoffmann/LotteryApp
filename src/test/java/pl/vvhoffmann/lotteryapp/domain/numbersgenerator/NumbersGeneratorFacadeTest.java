@@ -20,12 +20,13 @@ class NumbersGeneratorFacadeTest {
 
     private final WinningNumbersRepository winningNumbersRepository = new NumbersGeneratorRepositoryTestImpl();
     private final NumbersReceiverFacade numbersReceiverFacade = mock(NumbersReceiverFacade.class);
+    private final OneRandomNumberFetcher fetcher = new SecureRandomOneNumberFetcher();
 
     @Test
     @DisplayName("Should return numbers set of size 6")
     public void should_return_set_of_required_size() {
         //given
-        RandomNumbersGenerable numbersGenerator = new RandomNumbersGenerator();
+        RandomNumbersGenerable numbersGenerator = new RandomNumbersGenerator(fetcher);
         when(numbersReceiverFacade.retrieveNextDrawDate()).thenReturn(LocalDateTime.now());
         NumbersGeneratorFacade numbersGeneratorFacade = new NumberGeneratorConfiguration().setUpForTest(numbersGenerator, winningNumbersRepository, numbersReceiverFacade);
         //when
@@ -38,7 +39,7 @@ class NumbersGeneratorFacadeTest {
     @DisplayName("Should return set of 6 numbers in range 1-99")
     public void should_return_set_of_required_size_within_required_range() {
         //given
-        RandomNumbersGenerable numbersGenerator = new RandomNumbersGenerator();
+        RandomNumbersGenerable numbersGenerator = new RandomNumbersGenerator(fetcher);
         when(numbersReceiverFacade.retrieveNextDrawDate()).thenReturn(LocalDateTime.now());
         NumbersGeneratorFacade numbersGeneratorFacade = new NumberGeneratorConfiguration().setUpForTest(numbersGenerator, winningNumbersRepository, numbersReceiverFacade);
         //when
@@ -100,7 +101,7 @@ class NumbersGeneratorFacadeTest {
     @DisplayName("Should return set of unique values")
     public void should_return_set_of_unique_values() {
         //given
-        RandomNumbersGenerable numbersGenerator = new RandomNumbersGenerator();
+        RandomNumbersGenerable numbersGenerator = new RandomNumbersGenerator(fetcher);
         when(numbersReceiverFacade.retrieveNextDrawDate()).thenReturn(LocalDateTime.now());
         NumbersGeneratorFacade numbersGeneratorFacade = new NumberGeneratorConfiguration().setUpForTest(numbersGenerator, winningNumbersRepository, numbersReceiverFacade);
         //when

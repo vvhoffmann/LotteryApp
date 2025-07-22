@@ -16,6 +16,6 @@ class NumbersGeneratorTestImpl implements RandomNumbersGenerable{
 
     @Override
     public Set<Integer> generateSixRandomNumbers() {
-        return Set.of(1,2,3,4,5,6);
+        return generatedNumbers;
     }
 }
