@@ -1,8 +1,8 @@
 package pl.vvhoffmann.lotteryapp.domain.numbersgenerator;
 
-import java.util.Set;
+import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.dto.SixRandomNumbersDto;
 
 public interface RandomNumbersGenerable {
 
-    Set<Integer> generateSixRandomNumbers();
+    SixRandomNumbersDto generateSixRandomNumbers();
 }
