@@ -28,7 +28,7 @@ class RandomNumbersGeneratorRestTemplate implements RandomNumbersGenerable {
         String url = UriComponentsBuilder.fromHttpUrl(urlForService)
                         .queryParam("min", LOWER_LIMIT)
                         .queryParam("max", UPPER_LIMIT)
-                        .queryParam("count", WINNING_NUMBERS_QUANTITY)
+                        .queryParam("count", RANDOM_BUMBERS_QUANTITY)
                         .toUriString();
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<HttpHeaders> requestEntity = new HttpEntity<>(headers);
