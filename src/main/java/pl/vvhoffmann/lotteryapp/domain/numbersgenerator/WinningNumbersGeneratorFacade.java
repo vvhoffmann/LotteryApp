@@ -11,14 +11,15 @@ import java.util.Set;
 @AllArgsConstructor
 public class WinningNumbersGeneratorFacade {
 
-    RandomNumbersGenerable randomNumbersGenerator;
-    WinningNumbersRepository winningNumbersRepository;
-    WinningNumbersValidator winningNumbersValidator;
-    NumbersReceiverFacade numbersReceiverFacade;
+    private final RandomNumbersGenerable randomNumbersGenerator;
+    private final WinningNumbersRepository winningNumbersRepository;
+    private final WinningNumbersValidator winningNumbersValidator;
+    private final NumbersReceiverFacade numbersReceiverFacade;
+    private final WinningNumbersGeneratorFacadeConfigurationProperties properties;
 
     public WinningNumbersDto generateWinningNumbers() {
         LocalDateTime nextDrawDate = numbersReceiverFacade.retrieveNextDrawDate();
-        SixRandomNumbersDto winningNumbersDto = randomNumbersGenerator.generateSixRandomNumbers();
+        SixRandomNumbersDto winningNumbersDto = randomNumbersGenerator.generateSixRandomNumbers(properties.count(), properties.lowerLimit(),properties.upperLimit());
         final Set<Integer> validatedNumbers = winningNumbersValidator.validate(winningNumbersDto.numbers());
         winningNumbersRepository.save(WinningNumbers.builder()
                 .numbers(validatedNumbers)
