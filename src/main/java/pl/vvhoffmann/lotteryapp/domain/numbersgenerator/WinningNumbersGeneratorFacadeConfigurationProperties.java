@@ -5,5 +5,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Builder
 @ConfigurationProperties(prefix= "lottery.number-generator.facade")
-public record WinningNumbersGeneratorFacadeConfigurationProperties(int count, int lowerLimit, int upperLimit) {
+public record WinningNumbersGeneratorFacadeConfigurationProperties(
+        int count,
+        int lowerLimit,
+        int upperLimit) {
 }
