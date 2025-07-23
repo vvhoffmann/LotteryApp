@@ -1,0 +1,39 @@
+package pl.vvhoffmann.lotteryapp.infrastructure.numbersgenerator.client;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
+import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.RandomNumbersGenerable;
+
+@Configuration
+class RandomNumbersGeneratorClientConfig {
+
+    @Bean
+    public RestTemplateResponseErrorHandler restTemplateResponseErrorHandler()
+    {
+        return new RestTemplateResponseErrorHandler();
+    }
+
+    @Bean
+    public RestTemplate restTemplate(RestTemplateResponseErrorHandler restTemplateResponseErrorHandler){
+        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+        requestFactory.setConnectTimeout(10000);
+        requestFactory.setReadTimeout(10000);
+
+        return new RestTemplateBuilder()
+                .errorHandler(restTemplateResponseErrorHandler)
+                .build();
+
+    }
+
+    @Bean
+    public RandomNumbersGenerable remoteRandomNumberGenerable(RestTemplate restTemplate,
+                                                              @Value("${lottery.number-generator.http.client.config.uri}") String uri,
+                                                              @Value("${lottery.number-generator.http.client.config.port}") int port) {
+
+        return new RandomNumbersGeneratorRestTemplate(restTemplate, uri, port);
+    }
+}
