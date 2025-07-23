@@ -18,10 +18,12 @@ class RandomNumbersGeneratorClientConfig {
     }
 
     @Bean
-    public RestTemplate restTemplate(RestTemplateResponseErrorHandler restTemplateResponseErrorHandler){
+    public RestTemplate restTemplate(RestTemplateResponseErrorHandler restTemplateResponseErrorHandler,
+                                     @Value("$lottery.number-generator.facade.connectionTimeout:5000") int connectionTimeout,
+                                     @Value("$lottery.number-generator.facade.readTimeout:5000") int readTimeout){
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
-        requestFactory.setConnectTimeout(10000);
-        requestFactory.setReadTimeout(10000);
+        requestFactory.setConnectTimeout(connectionTimeout);
+        requestFactory.setReadTimeout(readTimeout);
 
         return new RestTemplateBuilder()
                 .errorHandler(restTemplateResponseErrorHandler)
@@ -31,8 +33,8 @@ class RandomNumbersGeneratorClientConfig {
 
     @Bean
     public RandomNumbersGenerable remoteRandomNumberGenerable(RestTemplate restTemplate,
-                                                              @Value("${lottery.number-generator.http.client.config.uri}") String uri,
-                                                              @Value("${lottery.number-generator.http.client.config.port}") int port) {
+                                                              @Value("${RandomNumberGeneratorRestTemplateConfigurationProperties}") String uri,
+                                                              @Value("${RandomNumberGeneratorRestTemplateConfigurationProperties}") int port) {
 
         return new RandomNumbersGeneratorRestTemplate(restTemplate, uri, port);
     }
