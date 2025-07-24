@@ -27,9 +27,9 @@ class ResultCheckerFacadeTest {
     @DisplayName("Should save all players with correct message")
     public void should_save_all_players() {
         //given
-        LocalDateTime drawDate = LocalDateTime.of(2024, 10, 12, 12,0,0);
+        LocalDateTime drawDate = LocalDateTime.of(2024, 10, 12, 12, 0, 0);
         when(winningNumbersGeneratorFacade.generateWinningNumbers()).thenReturn(WinningNumbersDto.builder()
-                .winningNumbers(Set.of(1,2,3,4,5,6))
+                .winningNumbers(Set.of(1, 2, 3, 4, 5, 6))
                 .build());
         when(numbersReceiverFacade.retrieveAllTicketsByNextDrawDate()).thenReturn(
                 List.of(TicketDto.builder()
@@ -50,8 +50,8 @@ class ResultCheckerFacadeTest {
         );
         ResultCheckerFacade resultCheckerFacade = new ResultCheckerConfiguration().setUpForTest(
                 winningNumbersGeneratorFacade,
-                                                                                    numbersReceiverFacade,
-                                                                                    playersRepository);
+                numbersReceiverFacade,
+                playersRepository);
         //when
         PlayersDto winnersDto = resultCheckerFacade.generateWinners();
         //then
@@ -59,21 +59,21 @@ class ResultCheckerFacadeTest {
         ResultDto expectedDto1 = ResultDto.builder()
                 .id("Ticket1")
                 .numbers(Set.of(1, 2, 3, 4, 5, 6))
-                .hitNumbers(Set.of(1,2,3,4,5,6))
+                .hitNumbers(Set.of(1, 2, 3, 4, 5, 6))
                 .drawDate(drawDate)
                 .isWinner(true)
                 .build();
         ResultDto expectedResult2 = ResultDto.builder()
                 .id("Ticket2")
                 .numbers(Set.of(1, 2, 3, 7, 8, 9))
-                .hitNumbers(Set.of(1,2,3))
+                .hitNumbers(Set.of(1, 2, 3))
                 .drawDate(drawDate)
                 .isWinner(true)
                 .build();
         ResultDto expectedResult3 = ResultDto.builder()
                 .id("Ticket3")
-                .numbers(Set.of( 4, 5, 6, 7, 8, 9))
-                .hitNumbers(Set.of(4,5,6))
+                .numbers(Set.of(4, 5, 6, 7, 8, 9))
+                .hitNumbers(Set.of(4, 5, 6))
                 .drawDate(drawDate)
                 .isWinner(true)
                 .build();
@@ -85,12 +85,11 @@ class ResultCheckerFacadeTest {
 
     @Test
     @DisplayName("Should generate correct Result record with correct data")
-    public void should_generate_result_with_correct_data_filled()
-    {
+    public void should_generate_result_with_correct_data_filled() {
         //given
-        LocalDateTime drawDate = LocalDateTime.of(2024, 10, 12, 12,0,0);
+        LocalDateTime drawDate = LocalDateTime.of(2024, 10, 12, 12, 0, 0);
         when(winningNumbersGeneratorFacade.generateWinningNumbers()).thenReturn(WinningNumbersDto.builder()
-                .winningNumbers(Set.of(1,2,3,4,5,6))
+                .winningNumbers(Set.of(1, 2, 3, 4, 5, 6))
                 .build());
         String id = "Ticket1";
         when(numbersReceiverFacade.retrieveAllTicketsByNextDrawDate()).thenReturn(
@@ -136,8 +135,8 @@ class ResultCheckerFacadeTest {
                 .build());
         ResultCheckerFacade resultCheckerFacade = new ResultCheckerConfiguration().setUpForTest(
                 winningNumbersGeneratorFacade,
-                                                    numbersReceiverFacade,
-                                                    playersRepository);
+                numbersReceiverFacade,
+                playersRepository);
         //when
         PlayersDto playersDto = resultCheckerFacade.generateWinners();
         //then

@@ -1,0 +1,4 @@
+lottery:
+  number-generator:
+    lotteryRunOccurrence: "*/5 * * * * *"
+

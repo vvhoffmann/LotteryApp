@@ -33,7 +33,7 @@ class ResultAnnouncerFacadeTest {
 
         ResultDto mockedResultDto = ResultDto.builder()
                 .id(id)
-                .numbers(Set.of(1,2,3,4,5,6))
+                .numbers(Set.of(1, 2, 3, 4, 5, 6))
                 .hitNumbers(Set.of())
                 .drawDate(drawDate)
                 .isWinner(false)
@@ -46,7 +46,7 @@ class ResultAnnouncerFacadeTest {
         //then
         ResultResponseDto expectedResultResponseDto = ResultResponseDto.builder()
                 .id(id)
-                .numbers(Set.of(1,2,3,4,5,6))
+                .numbers(Set.of(1, 2, 3, 4, 5, 6))
                 .hitNumbers(Set.of())
                 .drawDate(drawDate)
                 .isWinner(false)
@@ -70,8 +70,8 @@ class ResultAnnouncerFacadeTest {
 
         ResultDto mockedResultDto = ResultDto.builder()
                 .id(id)
-                .numbers(Set.of(1,2,3,4,5,6))
-                .hitNumbers(Set.of(1,2,3,4,5,6))
+                .numbers(Set.of(1, 2, 3, 4, 5, 6))
+                .hitNumbers(Set.of(1, 2, 3, 4, 5, 6))
                 .drawDate(drawDate)
                 .isWinner(true)
                 .build();
@@ -83,8 +83,8 @@ class ResultAnnouncerFacadeTest {
         //then
         ResultResponseDto expectedResultResponseDto = ResultResponseDto.builder()
                 .id(id)
-                .numbers(Set.of(1,2,3,4,5,6))
-                .hitNumbers(Set.of(1,2,3,4,5,6))
+                .numbers(Set.of(1, 2, 3, 4, 5, 6))
+                .hitNumbers(Set.of(1, 2, 3, 4, 5, 6))
                 .drawDate(drawDate)
                 .isWinner(true)
                 .build();
@@ -109,8 +109,8 @@ class ResultAnnouncerFacadeTest {
 
         ResultDto mockedResultDto = ResultDto.builder()
                 .id(id)
-                .numbers(Set.of(1,2,3,4,5,6))
-                .hitNumbers(Set.of(1,2,3))
+                .numbers(Set.of(1, 2, 3, 4, 5, 6))
+                .hitNumbers(Set.of(1, 2, 3))
                 .drawDate(drawDate)
                 .isWinner(true)
                 .build();
@@ -122,8 +122,8 @@ class ResultAnnouncerFacadeTest {
         //then
         ResultResponseDto expectedResultResponseDto = ResultResponseDto.builder()
                 .id(id)
-                .numbers(Set.of(1,2,3,4,5,6))
-                .hitNumbers(Set.of(1,2,3))
+                .numbers(Set.of(1, 2, 3, 4, 5, 6))
+                .hitNumbers(Set.of(1, 2, 3))
                 .drawDate(drawDate)
                 .isWinner(true)
                 .build();
@@ -141,8 +141,8 @@ class ResultAnnouncerFacadeTest {
         String id = "111";
         ResultDto mockedResultDto = ResultDto.builder()
                 .id(id)
-                .numbers(Set.of(1,2,3,4,5,6))
-                .hitNumbers(Set.of(1,2,3))
+                .numbers(Set.of(1, 2, 3, 4, 5, 6))
+                .hitNumbers(Set.of(1, 2, 3))
                 .drawDate(drawDate)
                 .isWinner(true)
                 .build();
@@ -184,9 +184,6 @@ class ResultAnnouncerFacadeTest {
                 .message(ResponseMessage.ID_DOES_NOT_EXIST_MESSAGE.message).build();
         assertThat(resultAnnouncerResponseDto).isEqualTo(expectedResponse);
     }
-
-
-
 
 
 }

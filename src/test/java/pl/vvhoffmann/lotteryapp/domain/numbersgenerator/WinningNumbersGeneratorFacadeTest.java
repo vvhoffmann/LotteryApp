@@ -10,11 +10,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class WinningNumbersGeneratorFacadeTest {
 
@@ -48,7 +48,7 @@ class WinningNumbersGeneratorFacadeTest {
         int lowerLimit = 1;
         Set<Integer> winningNumbers = winningNumbersDto.winningNumbers();
         boolean numbersInRange = winningNumbers.stream()
-                        .allMatch(number -> number >= lowerLimit && number <= upperLimit);
+                .allMatch(number -> number >= lowerLimit && number <= upperLimit);
         assertTrue(numbersInRange);
     }
 

@@ -12,15 +12,14 @@ import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.RandomNumbersGenerable;
 class RandomNumbersGeneratorClientConfig {
 
     @Bean
-    public RestTemplateResponseErrorHandler restTemplateResponseErrorHandler()
-    {
+    public RestTemplateResponseErrorHandler restTemplateResponseErrorHandler() {
         return new RestTemplateResponseErrorHandler();
     }
 
     @Bean
     public RestTemplate restTemplate(RestTemplateResponseErrorHandler restTemplateResponseErrorHandler,
                                      @Value("${lottery.number-generator.http.client.config.connectionTimeout}") int connectionTimeout,
-                                     @Value("${lottery.number-generator.http.client.config.readTimeout}") int readTimeout){
+                                     @Value("${lottery.number-generator.http.client.config.readTimeout}") int readTimeout) {
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
         requestFactory.setConnectTimeout(connectionTimeout);
         requestFactory.setReadTimeout(readTimeout);

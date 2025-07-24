@@ -1,12 +1,10 @@
 package pl.vvhoffmann.lotteryapp.domain.numbersreceiver;
 
-import org.springframework.stereotype.Service;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Service
 class NumberValidator {
 
     private static final int QUANTITY_OF_NUMBERS_FROM_USER = 6;
@@ -16,9 +14,9 @@ class NumberValidator {
     List<ValidationResult> errors = new LinkedList<>();
 
     List<ValidationResult> validate(final Set<Integer> userNumbers) {
-        if(!isNumbersSizeEqualSix(userNumbers))
+        if (!isNumbersSizeEqualSix(userNumbers))
             errors.add(ValidationResult.NOT_SIX_NUMBERS_GIVEN);
-        if(!areNumbersInRange(userNumbers))
+        if (!areNumbersInRange(userNumbers))
             errors.add(ValidationResult.NOT_IN_RANGE);
         return errors;
     }

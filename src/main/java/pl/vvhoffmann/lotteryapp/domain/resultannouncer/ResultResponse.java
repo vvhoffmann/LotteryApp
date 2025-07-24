@@ -6,11 +6,11 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Builder
-record ResultResponse (
+record ResultResponse(
         String id,
         LocalDateTime drawDate,
         Set<Integer> numbers,
         Set<Integer> hitNumbers,
         boolean isWinner
-){
+) {
 }

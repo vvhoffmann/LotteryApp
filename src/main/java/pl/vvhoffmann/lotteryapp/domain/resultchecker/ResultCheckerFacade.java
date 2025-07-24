@@ -14,10 +14,10 @@ import java.util.Set;
 @AllArgsConstructor
 public class ResultCheckerFacade {
 
-    WinningNumbersGeneratorFacade winningNumbersGeneratorFacade;
-    NumbersReceiverFacade numbersReceiverFacade;
-    PlayersRepository playersRepository;
-    WinnersGenerator winnersGenerator;
+    private final WinningNumbersGeneratorFacade winningNumbersGeneratorFacade;
+    private final NumbersReceiverFacade numbersReceiverFacade;
+    private final PlayersRepository playersRepository;
+    private final WinnersGenerator winnersGenerator;
 
     public PlayersDto generateWinners() {
         List<TicketDto> allTicketsByDate = numbersReceiverFacade.retrieveAllTicketsByNextDrawDate();
