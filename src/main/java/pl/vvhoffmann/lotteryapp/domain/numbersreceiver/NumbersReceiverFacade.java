@@ -3,6 +3,7 @@ package pl.vvhoffmann.lotteryapp.domain.numbersreceiver;
 import lombok.AllArgsConstructor;
 import pl.vvhoffmann.lotteryapp.domain.numbersreceiver.dto.NumberReceiverResponseDto;
 import pl.vvhoffmann.lotteryapp.domain.numbersreceiver.dto.TicketDto;
+
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -20,7 +21,7 @@ public class NumbersReceiverFacade {
 
         final List<ValidationResult> validationNumbersList = numberValidator.validate(userNumbers);
 
-        if(!validationNumbersList.isEmpty()) {
+        if (!validationNumbersList.isEmpty()) {
             String resultMessage = numberValidator.createResultMessage();
             return NumberReceiverResponseDto.builder()
                     .ticketDto(null)
@@ -59,7 +60,7 @@ public class NumbersReceiverFacade {
 
     public List<TicketDto> retrieveAllTicketsByNextDrawDate(LocalDateTime date) {
         LocalDateTime drawDate = drawDateGenerator.getNextDrawDate();
-        if(date.isAfter(drawDate)) {
+        if (date.isAfter(drawDate)) {
             return Collections.emptyList();
         }
 

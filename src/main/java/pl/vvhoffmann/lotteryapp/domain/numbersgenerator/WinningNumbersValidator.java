@@ -9,9 +9,9 @@ class WinningNumbersValidator {
     private final int WINNING_NUMBERS_QUANTITY = 6;
 
     public Set<Integer> validate(final Set<Integer> winningNumbers) {
-        if(anyOfNumbersOutOfRange(winningNumbers))
+        if (anyOfNumbersOutOfRange(winningNumbers))
             throw new WinningNumberValidationException("Number is out of range");
-        if(!isCorrectQuantityOfNumbers(winningNumbers))
+        if (!isCorrectQuantityOfNumbers(winningNumbers))
             throw new WinningNumberValidationException("There are more/less than " + WINNING_NUMBERS_QUANTITY + " numbers");
         return winningNumbers;
     }

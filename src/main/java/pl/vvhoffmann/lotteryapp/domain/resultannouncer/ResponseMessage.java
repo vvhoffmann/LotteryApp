@@ -10,8 +10,7 @@ enum ResponseMessage {
 
     final String message;
 
-    ResponseMessage(String info)
-    {
+    ResponseMessage(String info) {
         message = info;
     }
 }

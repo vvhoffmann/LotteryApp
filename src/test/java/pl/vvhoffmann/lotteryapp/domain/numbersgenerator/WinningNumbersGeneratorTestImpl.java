@@ -4,7 +4,7 @@ import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.dto.SixRandomNumbersDto;
 
 import java.util.Set;
 
-class WinningNumbersGeneratorTestImpl implements RandomNumbersGenerable{
+class WinningNumbersGeneratorTestImpl implements RandomNumbersGenerable {
 
     private final Set<Integer> generatedNumbers;
 

@@ -32,22 +32,23 @@ class RandomNumbersGeneratorRestTemplate implements RandomNumbersGenerable {
         try {
             final ResponseEntity<List<Integer>> response = makeGetRequest(count, lowerLimit, upperLimit);
             Set<Integer> sixDistinctnumbers = getSixDistinctNumbers(response);
-            if(sixDistinctnumbers.size() != 6) {
+            if (sixDistinctnumbers.size() != 6) {
                 log.error("Set is less than 6 numbers. Have to make request one more time");
                 return generateSixRandomNumbers(count, lowerLimit, upperLimit);
             }
+            log.info("Prepared 6 random numbers: {}", sixDistinctnumbers);
             return SixRandomNumbersDto.builder()
                     .numbers(sixDistinctnumbers)
                     .build();
         } catch (ResourceAccessException e) {
-            log.error( "Error while fetching winning numbers using http client " + e.getMessage());
+            log.error("Error while fetching winning numbers using http client " + e.getMessage());
             return SixRandomNumbersDto.builder().build();
         }
     }
 
     private Set<Integer> getSixDistinctNumbers(final ResponseEntity<List<Integer>> response) {
         final List<Integer> numbers = response.getBody();
-        if(numbers==null){
+        if (numbers == null) {
             log.error("Response body is null and returning empty List");
             return Collections.emptySet();
         }
@@ -59,10 +60,10 @@ class RandomNumbersGeneratorRestTemplate implements RandomNumbersGenerable {
     private ResponseEntity<List<Integer>> makeGetRequest(final int count, final int lowerLimit, final int upperLimit) {
         String urlForService = getUrlForService("/api/v1.0/random");
         String url = UriComponentsBuilder.fromHttpUrl(urlForService)
-                        .queryParam("min", lowerLimit)
-                        .queryParam("max", upperLimit)
-                        .queryParam("count", count)
-                        .toUriString();
+                .queryParam("min", lowerLimit)
+                .queryParam("max", upperLimit)
+                .queryParam("count", count)
+                .toUriString();
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<HttpHeaders> requestEntity = new HttpEntity<>(headers);
         final ResponseEntity<List<Integer>> response = restTemplate.exchange(
