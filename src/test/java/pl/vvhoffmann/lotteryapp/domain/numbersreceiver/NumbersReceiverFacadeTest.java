@@ -21,7 +21,6 @@ class NumbersReceiverFacadeTest {
     private final TicketRepository ticketRepository = new TicketRepositoryTestImpl();
     Clock clock = Clock.systemUTC();
 
-
     @Test
     @DisplayName("Should return correct response when user gave 6 numbers")
     public void should_return_correct_response_when_user_input_six_numbers_in_range() {

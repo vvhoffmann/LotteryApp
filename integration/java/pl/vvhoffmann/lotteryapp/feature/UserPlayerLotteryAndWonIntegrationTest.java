@@ -4,7 +4,6 @@ import com.github.tomakehurst.wiremock.client.WireMock;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.vvhoffmann.lotteryapp.BaseIntegrationTest;
-import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.RandomNumbersGenerable;
 import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.WinningNumbersGeneratorFacade;
 import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.WinningNumbersNotFoundException;
 
@@ -32,7 +31,7 @@ public class UserPlayerLotteryAndWonIntegrationTest extends BaseIntegrationTest 
                         )));
         //step 2: system fetched winning numbers for draw date: 12.10.2024 12:00
         // given
-        LocalDateTime drawDate = LocalDateTime.of(2025, 07, 26, 12, 0, 0);
+        LocalDateTime drawDate = LocalDateTime.of(2024, 10, 12, 12, 0, 0);
         //when
         //then
         await().atMost(Duration.ofSeconds(20))
