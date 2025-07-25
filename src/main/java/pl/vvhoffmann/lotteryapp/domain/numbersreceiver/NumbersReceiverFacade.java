@@ -47,7 +47,6 @@ public class NumbersReceiverFacade {
         ticketRepository.save(savedTicket);
 
         return NumberReceiverResponseDto.builder()
-                .message("success")
                 .ticketDto(generatedTicket)
                 .message(ValidationResult.INPUT_SUCCESS.message)
                 .build();
@@ -64,7 +63,7 @@ public class NumbersReceiverFacade {
             return Collections.emptyList();
         }
 
-        return ticketRepository.findAllTicketsByDrawDate(date)
+        return ticketRepository.findAllByDrawDate(date)
                 .stream()
                 .filter(ticket -> ticket.drawDate().isEqual(date))
                 .map(ticket -> TicketDto.builder()
@@ -80,13 +79,11 @@ public class NumbersReceiverFacade {
 
 
     public TicketDto findByHash(String hash) {
-        Ticket ticket = ticketRepository.findByHash(hash);
+        Ticket ticket = ticketRepository.findById(hash);
         return TicketDto.builder()
                 .ticketId(ticket.id())
                 .numbers(ticket.numbers())
                 .drawDate(ticket.drawDate())
                 .build();
     }
-
-
 }

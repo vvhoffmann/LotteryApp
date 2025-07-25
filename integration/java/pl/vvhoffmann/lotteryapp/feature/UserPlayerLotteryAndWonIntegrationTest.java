@@ -75,9 +75,9 @@ public class UserPlayerLotteryAndWonIntegrationTest extends BaseIntegrationTest 
                 () -> assertThat(responseDto.ticketDto().drawDate()).isEqualTo(drawDate),
                 () -> assertThat(responseDto.ticketDto().numbers()).isEqualTo(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
                 () -> assertThat(responseDto.ticketDto().ticketId()).isNotNull(),
-                () -> assertThat(responseDto.message()).isEqualTo("success")
+                () -> assertThat(responseDto.message()).isEqualTo("SUCCESS")
         );
-        
+
         //step 4: 3 days and 1 minute passed, and it is 1 minute after the draw date (19.11.2022 12:01)
         //step 5: system generated result for TicketId: sampleTicketId with draw date 19.11.2022 12:00, and saved it with 6 hits
         //step 6: 3 hours passed, and it is 1 minute after announcement time (19.11.2022 15:01)
