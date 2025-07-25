@@ -8,6 +8,8 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.RandomNumbersGenerable;
 
+import java.time.Duration;
+
 @Configuration
 class RandomNumbersGeneratorClientConfig {
 
@@ -20,14 +22,12 @@ class RandomNumbersGeneratorClientConfig {
     public RestTemplate restTemplate(RestTemplateResponseErrorHandler restTemplateResponseErrorHandler,
                                      @Value("${lottery.number-generator.http.client.config.connectionTimeout}") int connectionTimeout,
                                      @Value("${lottery.number-generator.http.client.config.readTimeout}") int readTimeout) {
-        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
-        requestFactory.setConnectTimeout(connectionTimeout);
-        requestFactory.setReadTimeout(readTimeout);
 
         return new RestTemplateBuilder()
                 .errorHandler(restTemplateResponseErrorHandler)
+                .setConnectTimeout(Duration.ofMillis(connectionTimeout))
+                .setReadTimeout(Duration.ofMillis(readTimeout))
                 .build();
-
     }
 
     @Bean

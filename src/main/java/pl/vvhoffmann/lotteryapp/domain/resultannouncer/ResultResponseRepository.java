@@ -1,12 +1,14 @@
 package pl.vvhoffmann.lotteryapp.domain.resultannouncer;
 
-import java.util.Optional;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-interface ResultResponseRepository {
+@Repository
+interface ResultResponseRepository extends MongoRepository<ResultResponse, String> {
 
-    ResultResponse save(ResultResponse resultResponse);
+//    ResultResponse save(ResultResponse resultResponse);
 
-    boolean existsById(String id);
+//    boolean existsById(String id);
 
-    Optional<ResultResponse> findById(String id);
+//    Optional<ResultResponse> findById(String id);
 }
