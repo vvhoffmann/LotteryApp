@@ -26,7 +26,7 @@ class ResultAnnouncerFacadeTest {
         //given
         LocalDateTime drawDate = LocalDateTime.of(2024, 10, 12, 12, 0, 0);
         String id = "111";
-        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().setUpForTest(
+        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().resultAnnouncerFacade(
                 resultResponseRepository,
                 resultCheckerFacade,
                 Clock.systemUTC());
@@ -63,7 +63,7 @@ class ResultAnnouncerFacadeTest {
         //given
         LocalDateTime drawDate = LocalDateTime.of(2024, 10, 12, 12, 0, 0);
         String id = "111";
-        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().setUpForTest(
+        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().resultAnnouncerFacade(
                 resultResponseRepository,
                 resultCheckerFacade,
                 Clock.systemUTC());
@@ -102,7 +102,7 @@ class ResultAnnouncerFacadeTest {
         String id = "111";
         final Clock clock = Clock.fixed(LocalDateTime.of(2024, 10, 10, 10, 0, 0)
                 .toInstant(ZoneOffset.UTC), ZoneOffset.UTC);
-        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().setUpForTest(
+        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().resultAnnouncerFacade(
                 resultResponseRepository,
                 resultCheckerFacade,
                 clock);
@@ -148,7 +148,7 @@ class ResultAnnouncerFacadeTest {
                 .build();
 
         when(resultCheckerFacade.findById(id)).thenReturn(mockedResultDto);
-        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().setUpForTest(
+        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().resultAnnouncerFacade(
                 resultResponseRepository,
                 resultCheckerFacade,
                 Clock.systemUTC());
@@ -170,7 +170,7 @@ class ResultAnnouncerFacadeTest {
     public void should_return_response_with_hash_doesnt_exit_message_if_hash_doesnt_exist() {
         //given
         String id = "111";
-        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().setUpForTest(
+        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().resultAnnouncerFacade(
                 resultResponseRepository,
                 resultCheckerFacade,
                 Clock.systemUTC());

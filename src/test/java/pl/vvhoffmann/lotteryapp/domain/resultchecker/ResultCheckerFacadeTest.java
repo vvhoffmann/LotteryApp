@@ -48,7 +48,7 @@ class ResultCheckerFacadeTest {
                                 .drawDate(drawDate)
                                 .build())
         );
-        ResultCheckerFacade resultCheckerFacade = new ResultCheckerConfiguration().setUpForTest(
+        ResultCheckerFacade resultCheckerFacade = new ResultCheckerConfiguration().resultCheckerFacade(
                 winningNumbersGeneratorFacade,
                 numbersReceiverFacade,
                 playersRepository);
@@ -109,7 +109,7 @@ class ResultCheckerFacadeTest {
                                 .drawDate(drawDate)
                                 .build())
         );
-        ResultCheckerFacade resultCheckerFacade = new ResultCheckerConfiguration().setUpForTest(
+        ResultCheckerFacade resultCheckerFacade = new ResultCheckerConfiguration().resultCheckerFacade(
                 winningNumbersGeneratorFacade,
                 numbersReceiverFacade,
                 playersRepository);
@@ -133,7 +133,7 @@ class ResultCheckerFacadeTest {
         when(winningNumbersGeneratorFacade.generateWinningNumbers()).thenReturn(WinningNumbersDto.builder()
                 .winningNumbers(Set.of())
                 .build());
-        ResultCheckerFacade resultCheckerFacade = new ResultCheckerConfiguration().setUpForTest(
+        ResultCheckerFacade resultCheckerFacade = new ResultCheckerConfiguration().resultCheckerFacade(
                 winningNumbersGeneratorFacade,
                 numbersReceiverFacade,
                 playersRepository);

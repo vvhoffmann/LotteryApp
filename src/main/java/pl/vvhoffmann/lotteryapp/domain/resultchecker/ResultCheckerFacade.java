@@ -41,7 +41,7 @@ public class ResultCheckerFacade {
 
     public ResultDto findById(String id) {
         Player player = playersRepository.findById(id)
-                .orElseThrow(() -> new PlayerNotFoundException("Player not found"));
+                .orElseThrow(() -> new PlayerNotFoundException("Player with id " + id + " not found"));
         return ResultDto.builder()
                 .id(player.id())
                 .numbers(player.numbers())
