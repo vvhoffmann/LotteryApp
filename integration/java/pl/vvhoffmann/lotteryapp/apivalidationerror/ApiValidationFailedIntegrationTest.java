@@ -16,7 +16,6 @@ class ApiValidationFailedIntegrationTest extends BaseIntegrationTest {
     @Test
     public void should_return_400_bad_request_and_validation_message_when_request_doesnt_have_input_numbers() throws Exception {
         //given
-
         //when
         final ResultActions perform = mockMvc.perform(post("/inputNumbers")
                 .content("""
@@ -38,7 +37,6 @@ class ApiValidationFailedIntegrationTest extends BaseIntegrationTest {
     @Test
     public void should_return_400_bad_request_and_validation_message_when_request_is_empty() throws Exception {
         //given
-
         //when
         final ResultActions perform = mockMvc.perform(post("/inputNumbers")
                 .content("""
