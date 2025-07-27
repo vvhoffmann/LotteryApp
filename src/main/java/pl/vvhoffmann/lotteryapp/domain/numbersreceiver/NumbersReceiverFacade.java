@@ -19,9 +19,9 @@ public class NumbersReceiverFacade {
 
     public NumberReceiverResponseDto inputNumbers(Set<Integer> userNumbers) {
 
-        final List<ValidationResult> validationNumbersList = numberValidator.validate(userNumbers);
+        final List<ValidationResult> validationErrorsList = numberValidator.validate(userNumbers);
 
-        if (!validationNumbersList.isEmpty()) {
+        if (!validationErrorsList.isEmpty()) {
             String resultMessage = numberValidator.createResultMessage();
             return NumberReceiverResponseDto.builder()
                     .ticketDto(null)
