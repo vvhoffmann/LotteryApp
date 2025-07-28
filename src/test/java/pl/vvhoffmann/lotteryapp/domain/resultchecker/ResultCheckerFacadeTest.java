@@ -53,7 +53,7 @@ class ResultCheckerFacadeTest {
                 numbersReceiverFacade,
                 playersRepository);
         //when
-        PlayersDto winnersDto = resultCheckerFacade.generateWinners();
+        PlayersDto winnersDto = resultCheckerFacade.generateResults();
         //then
         List<ResultDto> resultDtos = winnersDto.results();
         ResultDto expectedDto1 = ResultDto.builder()
@@ -113,7 +113,7 @@ class ResultCheckerFacadeTest {
                 winningNumbersGeneratorFacade,
                 numbersReceiverFacade,
                 playersRepository);
-        resultCheckerFacade.generateWinners();
+        resultCheckerFacade.generateResults();
         //when
         ResultDto resultDto = resultCheckerFacade.findById("Ticket1");
         //then
@@ -138,7 +138,7 @@ class ResultCheckerFacadeTest {
                 numbersReceiverFacade,
                 playersRepository);
         //when
-        PlayersDto playersDto = resultCheckerFacade.generateWinners();
+        PlayersDto playersDto = resultCheckerFacade.generateResults();
         //then
         String message = playersDto.message();
         assertThat(message).isEqualTo("Winning numbers failed to retrieve");

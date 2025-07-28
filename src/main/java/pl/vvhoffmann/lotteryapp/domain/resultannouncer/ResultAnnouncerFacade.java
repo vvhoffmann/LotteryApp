@@ -8,13 +8,10 @@ import pl.vvhoffmann.lotteryapp.domain.resultchecker.dto.ResultDto;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Optional;
 
 @AllArgsConstructor
 public class ResultAnnouncerFacade {
-
-    public static LocalTime RESULT_ANNOUNCMENT_TIME = LocalTime.of(12, 5);
 
     private final ResultCheckerFacade resultCheckerFacade;
     private final ResultResponseRepository resultResponseRepository;
@@ -41,7 +38,7 @@ public class ResultAnnouncerFacade {
     }
 
     private boolean isAfterResultAnnouncementTime(final ResultDto resultDto) {
-        LocalDateTime announcementDateTime = LocalDateTime.of(resultDto.drawDate().toLocalDate(), RESULT_ANNOUNCMENT_TIME);
+        LocalDateTime announcementDateTime = resultDto.drawDate();
         return LocalDateTime.now(clock).isAfter(announcementDateTime);
     }
 

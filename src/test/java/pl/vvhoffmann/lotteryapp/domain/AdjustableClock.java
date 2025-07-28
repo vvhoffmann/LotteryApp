@@ -78,6 +78,11 @@ public class AdjustableClock extends Clock {
         advanceInTimeBy(offset);
     }
 
+    public void plusMinutes(int minutes) {
+        Duration offset = Duration.ofHours(minutes);
+        advanceInTimeBy(offset);
+    }
+
     public void plusDaysAndMinutes(int days, int minutes) {
         Duration offset = Duration.ofDays(days);
         advanceInTimeBy(offset);
