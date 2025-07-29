@@ -4,21 +4,21 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-class WinnersGenerator {
+class ResultsGenerator {
 
     private final int MINIMAL_NUMBERS_WHEN_PLAYER_WON = 3;
 
 
-    List<Player> retrieveWinners(final List<Ticket> tickets, final Set<Integer> winningNumbers) {
+    List<Player> retrieveResults(final List<Ticket> tickets, final Set<Integer> winningNumbers) {
         return tickets.stream()
                 .map(ticket -> {
                     Set<Integer> hitNumbers = calculateHits(winningNumbers, ticket);
-                    return buildPlayer(ticket, hitNumbers);
+                    return buildResult(ticket, hitNumbers);
                 })
                 .collect(Collectors.toList());
     }
 
-    private Player buildPlayer(final Ticket ticket, final Set<Integer> hitNumbers) {
+    private Player buildResult(final Ticket ticket, final Set<Integer> hitNumbers) {
         return Player.builder()
                 .isWinner(isWinner(hitNumbers))
                 .id(ticket.id())

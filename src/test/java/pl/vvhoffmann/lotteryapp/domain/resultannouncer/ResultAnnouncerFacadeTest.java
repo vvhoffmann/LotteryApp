@@ -38,7 +38,7 @@ class ResultAnnouncerFacadeTest {
                 .drawDate(drawDate)
                 .isWinner(false)
                 .build();
-        when(resultCheckerFacade.findById(id)).thenReturn(mockedResultDto);
+        when(resultCheckerFacade.findByTicketId(id)).thenReturn(mockedResultDto);
 
         //when
         final ResultAnnouncerResponseDto resultAnnouncerResponseDto = resultAnnouncerFacade.checkResult(id);
@@ -75,7 +75,7 @@ class ResultAnnouncerFacadeTest {
                 .drawDate(drawDate)
                 .isWinner(true)
                 .build();
-        when(resultCheckerFacade.findById(id)).thenReturn(mockedResultDto);
+        when(resultCheckerFacade.findByTicketId(id)).thenReturn(mockedResultDto);
 
         //when
         final ResultAnnouncerResponseDto resultAnnouncerResponseDto = resultAnnouncerFacade.checkResult(id);
@@ -114,7 +114,7 @@ class ResultAnnouncerFacadeTest {
                 .drawDate(drawDate)
                 .isWinner(true)
                 .build();
-        when(resultCheckerFacade.findById(id)).thenReturn(mockedResultDto);
+        when(resultCheckerFacade.findByTicketId(id)).thenReturn(mockedResultDto);
 
         //when
         final ResultAnnouncerResponseDto resultAnnouncerResponseDto = resultAnnouncerFacade.checkResult(id);
@@ -147,7 +147,7 @@ class ResultAnnouncerFacadeTest {
                 .isWinner(true)
                 .build();
 
-        when(resultCheckerFacade.findById(id)).thenReturn(mockedResultDto);
+        when(resultCheckerFacade.findByTicketId(id)).thenReturn(mockedResultDto);
         ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().resultAnnouncerFacade(
                 resultResponseRepository,
                 resultCheckerFacade,
@@ -174,7 +174,7 @@ class ResultAnnouncerFacadeTest {
                 resultResponseRepository,
                 resultCheckerFacade,
                 Clock.systemUTC());
-        when(resultCheckerFacade.findById(id)).thenReturn(null);
+        when(resultCheckerFacade.findByTicketId(id)).thenReturn(null);
         //when
         ResultAnnouncerResponseDto resultAnnouncerResponseDto = resultAnnouncerFacade.checkResult(id);
 

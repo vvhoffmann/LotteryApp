@@ -40,8 +40,8 @@ public class BaseIntegrationTest {
     @Autowired
     public ObjectMapper objectMapper;
 
-//    @Autowired
-//    public AdjustableClock clock;
+    @Autowired
+    public AdjustableClock clock;
 
     @DynamicPropertySource
     public static void propertiesOverride(DynamicPropertyRegistry registry) {

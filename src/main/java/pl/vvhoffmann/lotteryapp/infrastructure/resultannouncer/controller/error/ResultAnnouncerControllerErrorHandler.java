@@ -6,16 +6,16 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import pl.vvhoffmann.lotteryapp.domain.resultchecker.PlayerNotFoundException;
+import pl.vvhoffmann.lotteryapp.domain.resultchecker.ResultNotFoundException;
 
 @ControllerAdvice
 @Log4j2
 public class ResultAnnouncerControllerErrorHandler {
 
-    @ExceptionHandler(PlayerNotFoundException.class)
+    @ExceptionHandler(ResultNotFoundException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResultAnnouncerErrorResponse handlePlayerNotFoundError(PlayerNotFoundException e)
+    public ResultAnnouncerErrorResponse handlePlayerNotFoundError(ResultNotFoundException e)
     {
         final String message = e.getMessage();
         log.error(message);

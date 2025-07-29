@@ -1,13 +1,16 @@
 package pl.vvhoffmann.lotteryapp.domain.resultchecker;
 
 import lombok.Builder;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @Builder
-record Ticket(String id,
-              Set<Integer> numbers,
-              LocalDateTime drawDate
+@Document
+record Ticket(
+        String id,
+        Set<Integer> numbers,
+        LocalDateTime drawDate
 ) {
 }

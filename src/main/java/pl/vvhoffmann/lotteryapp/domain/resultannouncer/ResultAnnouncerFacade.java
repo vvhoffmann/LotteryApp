@@ -8,13 +8,10 @@ import pl.vvhoffmann.lotteryapp.domain.resultchecker.dto.ResultDto;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Optional;
 
 @AllArgsConstructor
 public class ResultAnnouncerFacade {
-
-    public static LocalTime RESULT_ANNOUNCMENT_TIME = LocalTime.of(12, 5);
 
     private final ResultCheckerFacade resultCheckerFacade;
     private final ResultResponseRepository resultResponseRepository;
@@ -28,20 +25,20 @@ public class ResultAnnouncerFacade {
                 return ResultAnnouncerMapper.mapFromResultResponseToResultAnnouncerResponseDto(responseFromCache);
             }
         }
-        ResultDto resultDto = resultCheckerFacade.findById(id);
+        ResultDto resultDto = resultCheckerFacade.findByTicketId(id);
         if (resultDto == null)
             return new ResultAnnouncerResponseDto(null, ResponseMessage.ID_DOES_NOT_EXIST_MESSAGE.message);
         ResultResponseDto resultResponseDto = buildResponseDto(resultDto);
         resultResponseRepository.save(buildResultResponse(resultResponseDto));
         if (resultResponseRepository.existsById(id) && !isAfterResultAnnouncementTime(resultDto))
             return new ResultAnnouncerResponseDto(resultResponseDto, ResponseMessage.WAIT_MESSAGE.message);
-        if (resultCheckerFacade.findById(id).isWinner())
+        if (resultCheckerFacade.findByTicketId(id).isWinner())
             return new ResultAnnouncerResponseDto(resultResponseDto, ResponseMessage.WIN_MESSAGE.message);
         return new ResultAnnouncerResponseDto(resultResponseDto, ResponseMessage.LOSE_MESSAGE.message);
     }
 
     private boolean isAfterResultAnnouncementTime(final ResultDto resultDto) {
-        LocalDateTime announcementDateTime = LocalDateTime.of(resultDto.drawDate().toLocalDate(), RESULT_ANNOUNCMENT_TIME);
+        LocalDateTime announcementDateTime = resultDto.drawDate();
         return LocalDateTime.now(clock).isAfter(announcementDateTime);
     }
 

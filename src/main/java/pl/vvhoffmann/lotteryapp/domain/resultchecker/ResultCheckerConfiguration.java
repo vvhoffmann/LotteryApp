@@ -12,7 +12,7 @@ class ResultCheckerConfiguration {
     ResultCheckerFacade resultCheckerFacade(WinningNumbersGeneratorFacade winningNumbersGeneratorFacade,
                                             NumbersReceiverFacade numbersReceiverFacade,
                                             PlayersRepository playersRepository) {
-        WinnersGenerator winnersGenerator = new WinnersGenerator();
-        return new ResultCheckerFacade(winningNumbersGeneratorFacade, numbersReceiverFacade, playersRepository, winnersGenerator);
+        ResultsGenerator resultsGenerator = new ResultsGenerator();
+        return new ResultCheckerFacade(winningNumbersGeneratorFacade, numbersReceiverFacade, playersRepository, resultsGenerator);
     }
 }
