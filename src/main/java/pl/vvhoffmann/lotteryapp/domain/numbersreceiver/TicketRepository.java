@@ -5,13 +5,14 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-interface TicketRepository extends MongoRepository<Ticket, Integer> {
+public interface TicketRepository extends MongoRepository<Ticket, String> {
 
 //    Ticket save(Ticket ticket);
 
     List<Ticket> findAllByDrawDate(LocalDateTime drawDate);
 
-    Ticket findById(String id);
+    Optional<Ticket> findById(String id);
 }

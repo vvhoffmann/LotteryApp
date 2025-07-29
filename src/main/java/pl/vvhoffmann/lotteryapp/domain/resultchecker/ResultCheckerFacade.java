@@ -39,11 +39,11 @@ public class ResultCheckerFacade {
 
     }
 
-    public ResultDto findById(String id) {
+    public ResultDto findByTicketId(String id) {
         Player player = playersRepository.findById(id)
                 .orElseThrow(() -> new ResultNotFoundException("Result with id " + id + " not found"));
         return ResultDto.builder()
-                .id(player.id())
+                .id(id)
                 .numbers(player.numbers())
                 .drawDate(player.drawDate())
                 .isWinner(player.isWinner())

@@ -115,7 +115,7 @@ class ResultCheckerFacadeTest {
                 playersRepository);
         resultCheckerFacade.generateResults();
         //when
-        ResultDto resultDto = resultCheckerFacade.findById("Ticket1");
+        ResultDto resultDto = resultCheckerFacade.findByTicketId("Ticket1");
         //then
         ResultDto expectedResult = ResultDto.builder()
                 .id("Ticket1")

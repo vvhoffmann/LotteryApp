@@ -119,7 +119,7 @@ public class UserPlayerLotteryAndWonIntegrationTest extends BaseIntegrationTest 
                         .until(
                                 () -> {
                                     try{
-                                        final ResultDto result = resultCheckerFacade.findById(ticketId);
+                                        final ResultDto result = resultCheckerFacade.findByTicketId(ticketId);
                                         return !result.numbers().isEmpty();
                                     } catch (ResultNotFoundException e) {
                                         return false;
@@ -133,6 +133,8 @@ public class UserPlayerLotteryAndWonIntegrationTest extends BaseIntegrationTest 
 
 
         //step 8: user made GET /results/sampleTicketId and system returned 200 (OK)
+
+
 
         
     }

@@ -78,8 +78,9 @@ public class NumbersReceiverFacade {
     }
 
 
-    public TicketDto findByHash(String hash) {
-        Ticket ticket = ticketRepository.findById(hash);
+    public TicketDto findById(String hash) {
+        Ticket ticket = ticketRepository.findById(hash)
+                .orElseThrow(() -> new RuntimeException("Ticket not found"));
         return TicketDto.builder()
                 .ticketId(ticket.id())
                 .numbers(ticket.numbers())

@@ -1,4 +1,5 @@
 lottery:
   number-generator:
     lotteryRunOccurrence: "0/15 * * * * *"
-
+  result-checker:
+    lotteryRunOccurrence: "0/7 * * * * *"

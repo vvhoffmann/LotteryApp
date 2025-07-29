@@ -5,7 +5,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -25,8 +24,14 @@ class TicketRepositoryTestImpl implements TicketRepository {
     }
 
     @Override
-    public Ticket findById(final String id) {
-        return db.get(id);
+    public Optional<Ticket> findById(final String id) {
+
+        return Optional.ofNullable(db.get(id));
+    }
+
+    @Override
+    public boolean existsById(final String s) {
+        return false;
     }
 
     @Override
@@ -86,22 +91,12 @@ class TicketRepositoryTestImpl implements TicketRepository {
     }
 
     @Override
-    public Optional<Ticket> findById(final Integer integer) {
-        return Optional.empty();
-    }
-
-    @Override
-    public boolean existsById(final Integer integer) {
-        return false;
-    }
-
-    @Override
     public List<Ticket> findAll() {
         return List.of();
     }
 
     @Override
-    public List<Ticket> findAllById(final Iterable<Integer> integers) {
+    public List<Ticket> findAllById(final Iterable<String> strings) {
         return List.of();
     }
 
@@ -111,7 +106,7 @@ class TicketRepositoryTestImpl implements TicketRepository {
     }
 
     @Override
-    public void deleteById(final Integer integer) {
+    public void deleteById(final String s) {
 
     }
 
@@ -121,7 +116,7 @@ class TicketRepositoryTestImpl implements TicketRepository {
     }
 
     @Override
-    public void deleteAllById(final Iterable<? extends Integer> integers) {
+    public void deleteAllById(final Iterable<? extends String> strings) {
 
     }
 
