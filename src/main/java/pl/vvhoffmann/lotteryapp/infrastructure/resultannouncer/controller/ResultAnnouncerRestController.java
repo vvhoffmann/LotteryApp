@@ -19,6 +19,6 @@ class ResultAnnouncerRestController {
     public ResponseEntity<ResultAnnouncerResponseDto> chceckResultsById(@PathVariable("ticketId") String ticketId)
     {
         final ResultAnnouncerResponseDto resultAnnouncerResponseDto = resultAnnouncerFacade.checkResult(ticketId);
-        return new ResponseEntity<>(resultAnnouncerResponseDto, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(resultAnnouncerResponseDto, HttpStatus.OK);
     }
 }

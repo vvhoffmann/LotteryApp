@@ -1,6 +1,7 @@
 package pl.vvhoffmann.lotteryapp.feature;
 
 import com.github.tomakehurst.wiremock.client.WireMock;
+import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -10,6 +11,7 @@ import pl.vvhoffmann.lotteryapp.BaseIntegrationTest;
 import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.WinningNumbersGeneratorFacade;
 import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.WinningNumbersNotFoundException;
 import pl.vvhoffmann.lotteryapp.domain.numbersreceiver.dto.NumberReceiverResponseDto;
+import pl.vvhoffmann.lotteryapp.domain.resultannouncer.dto.ResultAnnouncerResponseDto;
 import pl.vvhoffmann.lotteryapp.domain.resultchecker.ResultNotFoundException;
 import pl.vvhoffmann.lotteryapp.domain.resultchecker.ResultCheckerFacade;
 import pl.vvhoffmann.lotteryapp.domain.resultchecker.dto.ResultDto;
@@ -27,6 +29,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@Log4j2
 public class UserPlayerLotteryAndWonIntegrationTest extends BaseIntegrationTest {
 
     @Autowired
@@ -53,8 +56,8 @@ public class UserPlayerLotteryAndWonIntegrationTest extends BaseIntegrationTest 
         // given
         LocalDateTime drawDate = LocalDateTime.of(2024, 10, 12, 12, 0, 0);
         //when && then
-        await().atMost(Duration.ofSeconds(15))
-                .pollInterval(Duration.ofSeconds(5))
+        await().atMost(Duration.ofSeconds(24))
+                .pollInterval(Duration.ofSeconds(1L))
                 .until(() -> {
                             try {
                                 return !winningNumbersGeneratorFacade.retrieveWinningNumbersByDrawDate(drawDate).winningNumbers().isEmpty();
@@ -88,6 +91,7 @@ public class UserPlayerLotteryAndWonIntegrationTest extends BaseIntegrationTest 
                 () -> assertThat(ticketId).isNotNull(),
                 () -> assertThat(responseDto.message()).isEqualTo("SUCCESS")
         );
+        log.info("registered ticket with id " + ticketId);
 
 
         //step 4: user made GET /results/notExistingId and system returned 404(NOT_FOUND) and body with
@@ -112,6 +116,7 @@ public class UserPlayerLotteryAndWonIntegrationTest extends BaseIntegrationTest 
         //step 5: 2 days and 55 minutes passed, and it is 5 minute before draw (12.10.2024 11:55)
         // given && when && then
         clock.plusDaysAndMinutes(2, 55);
+        log.info("2 days and 55 minutes passed");
 
         //step 6: system generated result for TicketId: sampleTicketId with draw date 12.10.2024 12:00, and saved it with 6 hits
         await().atMost(Duration.ofSeconds(20))
@@ -130,13 +135,23 @@ public class UserPlayerLotteryAndWonIntegrationTest extends BaseIntegrationTest 
 
         //step 7: 6 minutes passed and it is 1 minute after the draw (12.10.2024 12:01)
         clock.plusMinutes(6);
+        log.info("6 minutes passed");
 
 
         //step 8: user made GET /results/sampleTicketId and system returned 200 (OK)
-
-
-
-        
+        //given
+        url = "/results/" + ticketId;
+        log.info(url);
+        //when
+        final ResultActions performGetResultWithExistingId = mockMvc.perform(get(url));
+        //then
+        final MvcResult mvcResultGetMethod = performGetResultWithExistingId.andExpect(status().isOk()).andReturn();
+        final String jsonFromGetMethod = mvcResultGetMethod.getResponse().getContentAsString();
+        final ResultAnnouncerResponseDto resultAnnouncerResponseDto = objectMapper.readValue(jsonFromGetMethod, ResultAnnouncerResponseDto.class);
+        assertAll(
+                () -> assertThat(resultAnnouncerResponseDto.resultResponseDto().id()).isEqualTo(ticketId),
+                () -> assertThat(resultAnnouncerResponseDto.message()).isEqualTo("Congratulations, you won!"),
+                () -> assertThat(resultAnnouncerResponseDto.resultResponseDto().hitNumbers()).hasSize(6)
+        );
     }
-
 }
