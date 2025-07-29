@@ -1,6 +1,7 @@
 # LotteryApp
 
 A small backend service that stores lottery tickets submitted by users and schedules them for the next weekly draw.
+App contains Unit and Integration tests.
 
 ---
 
@@ -11,7 +12,7 @@ A small backend service that stores lottery tickets submitted by users and sched
 * **Najbliższe losowanie** – sobota, godzina 12:00. Jeżeli aktualny dzień to sobota < 12:00, losowanie odbędzie się tego
   samego dnia; w przeciwnym razie − w następną sobotę.
 * **Walidacja wejścia** – liczba liczb = 6, każda w zakresie 1‑99. W razie błędu zwracany jest komunikat z przyczyną.
-* **Składowanie danych** – MongoDB (kolekcja `ticket`).
+* **Składowanie danych** – MongoDB
 
 ---
 
@@ -56,7 +57,7 @@ A small backend service that stores lottery tickets submitted by users and sched
 └────────────────────────────────────────┘
 ```
 
-* **Rozdzielenie odpowiedzialności** – zasady biznesowe znajdują się w pakiecie `pl.lotto.domain.*`; zależności
+* **Rozdzielenie odpowiedzialności** – zasady biznesowe znajdują się w pakiecie `pl.lottery.domain.*`; zależności
   zewnętrzne są wstrzykiwane przez konstruktor `NumberReceiverFacade`, co ułatwia testowanie.
 * **Wzorzec „Facade”** – pojedynczy punkt wejścia do funkcjonalności modułu `numberreceiver` upraszcza integrację z
   innymi modułami lub warstwą REST.
