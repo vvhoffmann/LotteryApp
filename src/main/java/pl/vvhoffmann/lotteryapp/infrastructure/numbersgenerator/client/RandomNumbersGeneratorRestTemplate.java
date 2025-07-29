@@ -6,14 +6,14 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.RandomNumbersGenerable;
 import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.dto.SixRandomNumbersDto;
-
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -42,7 +42,7 @@ class RandomNumbersGeneratorRestTemplate implements RandomNumbersGenerable {
                     .build();
         } catch (ResourceAccessException e) {
             log.error("Error while fetching winning numbers using http client " + e.getMessage());
-            return SixRandomNumbersDto.builder().build();
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -50,7 +50,7 @@ class RandomNumbersGeneratorRestTemplate implements RandomNumbersGenerable {
         final List<Integer> numbers = response.getBody();
         if (numbers == null) {
             log.error("Response body is null and returning empty List");
-            return Collections.emptySet();
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT);
         }
         log.info("Response body returned : " + numbers);
         Set<Integer> distinctNumbers = new HashSet<>(numbers);
