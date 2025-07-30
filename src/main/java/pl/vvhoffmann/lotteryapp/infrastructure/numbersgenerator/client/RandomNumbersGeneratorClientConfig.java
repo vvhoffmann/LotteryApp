@@ -4,14 +4,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 import pl.vvhoffmann.lotteryapp.domain.numbersgenerator.RandomNumbersGenerable;
 
 import java.time.Duration;
 
 @Configuration
-class RandomNumbersGeneratorClientConfig {
+public class RandomNumbersGeneratorClientConfig {
 
     @Bean
     public RestTemplateResponseErrorHandler restTemplateResponseErrorHandler() {
@@ -31,9 +30,9 @@ class RandomNumbersGeneratorClientConfig {
     }
 
     @Bean
-    public RandomNumbersGenerable remoteRandomNumberGenerable(RestTemplate restTemplate,
-                                                              @Value("${lottery.number-generator.http.client.config.uri}") String uri,
-                                                              @Value("${lottery.number-generator.http.client.config.port}") int port) {
+    public RandomNumbersGenerable remoteRandomNumberGenerableClient(RestTemplate restTemplate,
+                                                                    @Value("${lottery.number-generator.http.client.config.uri}") String uri,
+                                                                    @Value("${lottery.number-generator.http.client.config.port}") int port) {
 
         return new RandomNumbersGeneratorRestTemplate(restTemplate, uri, port);
     }
