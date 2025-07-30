@@ -49,7 +49,7 @@ class RandomNumbersGeneratorRestTemplate implements RandomNumbersGenerable {
     private Set<Integer> getSixDistinctNumbers(final ResponseEntity<List<Integer>> response) {
         final List<Integer> numbers = response.getBody();
         if (numbers == null) {
-            log.error("Response body is null and returning empty List");
+            log.error("Response body is null");
             throw new ResponseStatusException(HttpStatus.NO_CONTENT);
         }
         log.info("Response body returned : " + numbers);
