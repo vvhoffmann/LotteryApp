@@ -1,22 +1,26 @@
-# LotteryApp
+# 🎰 LotteryApp
 
+Aplikacja backendowa do obsługi loterii. Umożliwia użytkownikom zgłaszanie swoich losów (zestawu 6 liczb) oraz przypisuje je do najbliższego losowania.
+
+ //ang
 A small backend service that stores lottery tickets submitted by users and schedules them for the next weekly draw.
 App contains Unit and Integration tests.
+---
+
+## 📝 Opis projektu
+
+**LotteryApp** to modularny monolit napisany w Javie (Spring Boot), który:
+
+- przyjmuje zgłoszenia z 6 unikalnymi liczbami (1–99),
+- przypisuje je do losowania w najbliższą sobotę o godzinie 12:00 (jeśli aktualny dzień to sobota < 12:00, losowanie odbędzie się tego
+  samego dnia; w przeciwnym razie − w następną sobotę)
+- przechowuje dane w MongoDB,
+- posiada walidację wejścia,
+- zawiera testy jednostkowe i integracyjne.
 
 ---
 
-## Krótkie podsumowanie
-
-* **Cel aplikacji** – przyjmowanie od użytkownika zestawów 6 unikalnych liczb (1‑99) i zapisywanie ich w bazie jako
-  *Ticket* wraz z unikalnym identyfikatorem oraz datą najbliższego losowania.
-* **Najbliższe losowanie** – sobota, godzina 12:00. Jeżeli aktualny dzień to sobota < 12:00, losowanie odbędzie się tego
-  samego dnia; w przeciwnym razie − w następną sobotę.
-* **Walidacja wejścia** – liczba liczb = 6, każda w zakresie 1‑99. W razie błędu zwracany jest komunikat z przyczyną.
-* **Składowanie danych** – MongoDB
-
----
-
-## Stos technologiczny
+## 🛠️ Stos technologiczny
 
 | Kategoria    | Wykorzystana technologia                            |
 |--------------|-----------------------------------------------------|
@@ -30,58 +34,19 @@ App contains Unit and Integration tests.
 
 ---
 
-## Architektura (wysoki poziom)
+## 🧱 Architektura
+
+- **Modularny monolit** – logiczny podział na moduły ułatwia rozwój i utrzymanie
+- **Heksagonalna architektura (Ports and Adapters)** – wyraźny podział na warstwy domeny, aplikacji i infrastruktury
 
 ```
-┌────────────────────────────────────────┐
-│           interfejs REST/API           │ (warstwa wejścia – TBD)
-└────────────────────────────────────────┘
-                 │                      
-                 ▼                      
-┌────────────────────────────────────────┐
-│        Warstwa domenowa (core)        │
-│                                        │
-│ NumberReceiverFacade                   │
-│  ├── NumberValidator                   │
-│  ├── DrawDateGenerator                 │
-│  └── HashGenerator                     │
-│                                        │
-│ Encje: Ticket                          │
-└────────────────────────────────────────┘
-                 │                      
-                 ▼                      
-┌────────────────────────────────────────┐
-│  Warstwa infrastruktury/persystencji   │
-│  (Spring Data – MongoDB)               │
-│  • TicketRepository                    │
-└────────────────────────────────────────┘
-```
+<img width="840" height="632" alt="Lottery - architecture" src="https://github.com/user-attachments/assets/9c171cac-2381-4b72-92cc-2aeca0e56e21" />
 
 * **Rozdzielenie odpowiedzialności** – zasady biznesowe znajdują się w pakiecie `pl.lottery.domain.*`; zależności
-  zewnętrzne są wstrzykiwane przez konstruktor `NumberReceiverFacade`, co ułatwia testowanie.
-* **Wzorzec „Facade”** – pojedynczy punkt wejścia do funkcjonalności modułu `numberreceiver` upraszcza integrację z
+  zewnętrzne są wstrzykiwane przez konstruktor fasady, co ułatwia testowanie.
+* **Wzorzec „Facade”** – pojedynczy punkt wejścia do funkcjonalności modułu upraszcza integrację z
   innymi modułami lub warstwą REST.
-* **Database‑first** – domena definiuje interfejs `TicketRepository`, a konkretna implementacja dostarcza Spring Data.
 * **Konteneryzacja** – plik `docker-compose.yml` uruchamia jednocześnie MongoDB (z GUI mongo‑express) i obraz zbudowany
   z Dockerfile aplikacji.
 
 ---
-
-## Uruchamianie lokalnie
-
-1. Sklonuj repozytorium i zbuduj artefakt:
-
-   ```bash
-   mvn clean package -DskipTests
-   ```
-2. Wystartuj stack:
-
-   ```bash
-   docker compose up --build
-   ```
-
-    * Aplikacja: `http://localhost:8080`
-    * mongo‑express: `http://localhost:8081`
-
-> **Uwaga:** Pierwsze uruchomienie może potrwać, ponieważ pobierane są obrazy bazowe.
-
