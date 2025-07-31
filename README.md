@@ -61,7 +61,7 @@ App contains Unit and Integration tests.
 Request Body (JSON):
 ```json 
 {
-"numbers": [5, 12, 23, 34, 45, 67]
+"numbers": [1,2,3,4,5,6]
 }                               
 ```
 
@@ -96,7 +96,7 @@ Przykładowe Body Response (JSON) :
 ```json
 {
   "resultResponseDto": {
-    "id": "ce2e02d6-92b9-498a-983d-7cbcdd8970a2",
+    "id": "96a34587-9945-4aba-b13f-0caadfbaab85",
     "drawDate": "2025-08-02T12:00:00",
     "numbers": [1,2,3,4,5,6],
     "hitNumbers": [1,2,3,4,5],
