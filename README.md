@@ -5,6 +5,7 @@ Aplikacja backendowa do obsługi loterii. Umożliwia użytkownikom zgłaszanie s
 ## English
 A small backend service that stores lottery tickets submitted by users and schedules them for the next weekly draw.
 App contains Unit and Integration tests.
+
 ---
 
 ## 📝 Opis projektu
@@ -17,6 +18,7 @@ App contains Unit and Integration tests.
 - przechowuje dane w MongoDB,
 - posiada walidację wejścia,
 - zawiera testy jednostkowe i integracyjne.
+
 
 ---
 
