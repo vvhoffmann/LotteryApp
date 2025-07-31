@@ -39,8 +39,8 @@ App contains Unit and Integration tests.
 - **Modularny monolit** – logiczny podział na moduły ułatwia rozwój i utrzymanie
 - **Heksagonalna architektura (Ports and Adapters)** – wyraźny podział na warstwy domeny, aplikacji i infrastruktury
 
-```
-<img width="840" height="632" alt="Lottery - architecture" src="https://github.com/user-attachments/assets/9c171cac-2381-4b72-92cc-2aeca0e56e21" />
+
+<img width="840" height="632" alt="Lottery - architecture" src="https://github.com/vvhoffmann/LotteryApp/blob/master/architecture/Lottery%20-%20architecture.png" />
 
 * **Rozdzielenie odpowiedzialności** – zasady biznesowe znajdują się w pakiecie `pl.lottery.domain.*`; zależności
   zewnętrzne są wstrzykiwane przez konstruktor fasady, co ułatwia testowanie.
@@ -50,3 +50,58 @@ App contains Unit and Integration tests.
   z Dockerfile aplikacji.
 
 ---
+## 🔌 Endpointy REST API
+
+### 🎟️ Zgłoszenie losu
+
+| Metoda | Endpoint        | Opis                          |
+|--------|-----------------|-------------------------------|
+| POST   | `/inputNumbers` | Zgłoszenie nowego losu        | 
+
+Request Body (JSON):
+```json 
+{
+"numbers": [5, 12, 23, 34, 45, 67]
+}                               
+```
+
+📌 Walidacja:
+- Dokładnie 6 liczb,
+- Każda liczba w zakresie 1–99,
+- Wszystkie muszą być unikalne.
+
+Przykładowe Response body:
+
+```json 
+{
+  "ticketDto": {
+    "ticketId": "96a34587-9945-4aba-b13f-0caadfbaab85",
+    "drawDate": "2025-08-02T12:00:00",
+    "numbers": [1,2,3,4,5,6]
+  },
+  "message": "SUCCESS"
+}
+```
+
+---
+### 🎟️ Uzyskiwanie wyników
+
+| Metoda | Endpoint               | Opis                                   |
+|--------|------------------------|----------------------------------------|
+| GET    | `/results/{ticketId}`  | Wyniki najnowszego losowania           |
+
+
+Przykładowe Body Response (JSON) :
+
+```json
+{
+  "resultResponseDto": {
+    "id": "ce2e02d6-92b9-498a-983d-7cbcdd8970a2",
+    "drawDate": "2025-08-02T12:00:00",
+    "numbers": [1,2,3,4,5,6],
+    "hitNumbers": [1,2,3,4,5],
+    "isWinner": true
+  },
+  "message": "Congratulations! You won"
+}
+```
