@@ -2,7 +2,7 @@
 
 Aplikacja backendowa do obsługi loterii. Umożliwia użytkownikom zgłaszanie swoich losów (zestawu 6 liczb) oraz przypisuje je do najbliższego losowania.
 
-#English
+# English
 A small backend service that stores lottery tickets submitted by users and schedules them for the next weekly draw.
 App contains Unit and Integration tests.
 ---
